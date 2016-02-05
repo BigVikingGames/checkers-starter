@@ -28,10 +28,10 @@ namespace BVG {
 		}
 
 		private readonly Dictionary<MoveDirection, IntVector2> directionLookup = new Dictionary<MoveDirection, IntVector2> {
-			{ MoveDirection.NORTH_EAST, new IntVector2(1, 1) },
-			{ MoveDirection.SOUTH_EAST, new IntVector2(1, -1) },
-			{ MoveDirection.SOUTH_WEST, new IntVector2(-1, -1) },
-			{ MoveDirection.NORTH_WEST, new IntVector2(-1, 1) }
+			{ MoveDirection.NORTH_EAST, new IntVector2(1, -1) },
+			{ MoveDirection.SOUTH_EAST, new IntVector2(1, 1) },
+			{ MoveDirection.SOUTH_WEST, new IntVector2(-1, 1) },
+			{ MoveDirection.NORTH_WEST, new IntVector2(-1, -1) }
 		};
 
 		private BoardState[,] boardStates = new BoardState[BOARD_GRID_SIZE, BOARD_GRID_SIZE];
@@ -105,7 +105,8 @@ namespace BVG {
 		/// <param name="vec">The IntVector2 we want the direction of.</param>
 		private MoveDirection GetDirectionForIntVector(IntVector2 vec) {
 			foreach (var entry in directionLookup) {
-				if (entry.Value == vec) {
+				IntVector2 curr = entry.Value;
+				if (curr.x == vec.x && curr.y == vec.y) {
 					return entry.Key;
 				}
 			}
